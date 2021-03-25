@@ -1,0 +1,6 @@
+Kyle - a45e4333-e9eb-4a13-89b3-07f289edf449
+Chris - 63858bc9-886c-44cd-9625-3d40011cd52f
+
+g.V('a45e4333-e9eb-4a13-89b3-07f289edf449').addE('knows').to(g.V('63858bc9-886c-44cd-9625-3d40011cd52f'))
+
+g.V('63858bc9-886c-44cd-9625-3d40011cd52f').addE('knows').to(g.V('a45e4333-e9eb-4a13-89b3-07f289edf449'))
