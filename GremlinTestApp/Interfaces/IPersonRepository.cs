@@ -14,7 +14,7 @@ namespace GremlinTestApp.Interfaces
 
         Task<PersonVertex?> UpdatePersonAsync(Guid id, string name);
 
-        Task<PersonVertex?> CreatePersonAsync(string partitionKey, string name, IEnumerable<Guid>? knows = null);
+        Task<PersonVertex?> CreatePersonAsync(string partitionKey, string name, uint age, IEnumerable<Guid>? knows = null);
 
         Task DeletePersonAsync(Guid id);
 

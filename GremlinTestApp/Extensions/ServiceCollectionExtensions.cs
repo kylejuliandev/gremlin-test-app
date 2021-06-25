@@ -14,7 +14,7 @@ namespace GremlinTestApp.Extensions
         {
             services.AddTransient<IGremlinClient>((serviceProvider) =>
             {
-                var gremlinOptions = serviceProvider.GetService<IOptions<GremlinOptions>>();
+                var gremlinOptions = serviceProvider.GetRequiredService<IOptions<GremlinOptions>>();
                 var gremlinConfig = gremlinOptions.Value;
 
                 return GetGremlinClient(gremlinConfig);
@@ -31,9 +31,7 @@ namespace GremlinTestApp.Extensions
             var connectionPoolSettings = new ConnectionPoolSettings()
             {
                 MaxInProcessPerConnection = 32,
-                PoolSize = 4,
-                ReconnectionAttempts = 4,
-                ReconnectionBaseDelay = TimeSpan.FromMilliseconds(1000)
+                PoolSize = 1
             };
 
             var webSocketConfiguration =
@@ -42,7 +40,14 @@ namespace GremlinTestApp.Extensions
                     options.KeepAliveInterval = TimeSpan.FromSeconds(10);
                 });
 
-            return new GremlinClient(gremlinServer, new GraphSON2Reader(), new GraphSON2Writer(), GremlinClient.GraphSON2MimeType, connectionPoolSettings, webSocketConfiguration);
+            return new GremlinClient(
+                gremlinServer,
+                new GraphSON2Reader(),
+                new GraphSON2Writer(),
+                GremlinClient.GraphSON2MimeType,
+                connectionPoolSettings,
+                webSocketConfiguration
+            );
         }
     }
 }

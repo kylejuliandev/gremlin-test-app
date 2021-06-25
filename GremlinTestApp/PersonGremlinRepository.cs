@@ -81,12 +81,13 @@ namespace GremlinTestApp
             return default;
         }
 
-        public async Task<PersonVertex?> CreatePersonAsync(string partitionKey, string name, IEnumerable<Guid>? knows = null)
+        public async Task<PersonVertex?> CreatePersonAsync(string partitionKey, string name, uint age, IEnumerable<Guid>? knows = null)
         {
-            var personQuery = new StringBuilder("g.addV('person').property('name', _personName).property('pk', _personPk)");
+            var personQuery = new StringBuilder("g.addV('person').property('name', _personName).property('age', _personAge).property('pk', _personPk)");
             var queryBindings = new Dictionary<string, object>()
             {
                 { "_personName", name },
+                { "_personAge", age },
                 { "_personPk", partitionKey }
             };
 

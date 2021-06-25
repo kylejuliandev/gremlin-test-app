@@ -15,6 +15,8 @@ namespace GremlinTestApp.Gremlin.Vertex
 
         public string? Name { get; set; }
 
+        public uint Age { get; set; }
+
         public static async Task<PersonVertex> MapAsync(IDictionary<string, object> items, CancellationToken cancelToken = default)
         {
             var jsonDocument = await BuildJsonDocument(items, cancelToken);
@@ -25,7 +27,8 @@ namespace GremlinTestApp.Gremlin.Vertex
                 source.GetProperty("id").GetGuid(),
                 properties.GetProperty("pk").GetVertexPropertyValue<string>())
             {
-                Name = properties.GetProperty("name").GetVertexPropertyValue<string>()
+                Name = properties.GetProperty("name").GetVertexPropertyValue<string>(),
+                Age = properties.GetProperty("age").GetVertexPropertyValue<uint>()
             };
 
             return person;
